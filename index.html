@@ -15,21 +15,22 @@
         <th>刪除</th>
       </tr>
     </table>
-        <script>
-        // 發送 GET 請求到 API
+ <script>
+    window.onload = function() {
         fetch('/api/users')
             .then(response => response.json())
             .then(data => {
                 const table = document.getElementById('usersTable');
                 data.forEach(user => {
-                    const row = table.insertRow();
+                    const row = table.insertRow(-1); // 使用 -1 以在表格末尾插入行
                     row.insertCell(0).innerHTML = user.id;
                     row.insertCell(1).innerHTML = user.mail;
                     row.insertCell(2).innerHTML = user.phone;
                 });
             })
             .catch(error => console.error('Error:', error));
-    </script>
+    };
+</script>
 </body>
 </html>
   </div> 
