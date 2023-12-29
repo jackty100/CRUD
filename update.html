@@ -4,19 +4,15 @@
     <title>更新用戶</title>
 </head>
 <body>
-    <h1>更新用戶</h1>
-    <form id="updateForm">
-        <input id="userId" readyonly>
-        <div>
-            <label for="mail">電子郵箱:</label>
-            <input id="mail" name="mail" required>
-        </div>
-        <div>
-            <label for="phone">電話:</label>
-            <input  id="phone" name="phone" required>
-        </div>
-        <button type="submit">更新</button>
-    </form>
+ 
+  <h1>修改</h1>
+  <form action="/update?id=${id}" method="post">
+    <div>ID<input type="text" name="id" value="${id}"readonly></div>
+    <div>電子信箱：<input type="text" name="mail" value="${mail}"></div>
+    <div>電話：<input type="text" name="phone" value="${phone}"></div>
+    <input type="submit" /> 
+  </form>
+</body>
 
     <script>
         // 從 URL 獲取用戶 ID
