@@ -18,15 +18,25 @@
             .then(data => {
                 const table = document.getElementById('usersTable');
                 data.forEach(user => {
-                    const row = table.insertRow(-1); // 使用 -1 以在表格末尾插入行
+                    const row = table.insertRow(-1);
                     row.insertCell(0).innerHTML = user.id;
                     row.insertCell(1).innerHTML = user.mail;
                     row.insertCell(2).innerHTML = user.phone;
+
+                    // 添加編輯按鈕
+                    const editCell = row.insertCell(3);
+                    const editButton = document.createElement('button');
+                    editButton.innerHTML = '編輯';
+                    editButton.onclick = function() {
+                        window.location.href = '/update.html?id=' + user.id;
+                    };
+                    editCell.appendChild(editButton);
                 });
             })
             .catch(error => console.error('Error:', error));
     };
 </script>
+
 </body>
 </html>
   </div> 
