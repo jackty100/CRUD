@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<body>
+  <a href="/add.html">新增</a>
+
+  
+  <div id="content">
+
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>電子信箱</th>
+        <th>電話</th>
+        <th>編輯</th>
+        <th>刪除</th>
+      </tr>
+    </table>
+        <script>
+        // 發送 GET 請求到 API
+        fetch('/api/users')
+            .then(response => response.json())
+            .then(data => {
+                const table = document.getElementById('usersTable');
+                data.forEach(user => {
+                    const row = table.insertRow();
+                    row.insertCell(0).innerHTML = user.id;
+                    row.insertCell(1).innerHTML = user.mail;
+                    row.insertCell(2).innerHTML = user.phone;
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>
+  </div> 
+
+</body>
