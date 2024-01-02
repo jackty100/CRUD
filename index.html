@@ -1,60 +1,57 @@
 <!DOCTYPE html>
-
 <body>
-  <a href="/add.html">新增</a>
-
+    <a href="/add.html">新增</a>
     <table id="usersTable">
         <tr>
             <th>ID</th>
             <th>信箱</th>
             <th>電話</th>
+            <th>操作</th>
         </tr>
         <!-- 表格數據將在這裡填充 -->
     </table>
- <script>
-    window.onload = function() {
-        fetch('/api/users')
-            .then(response => response.json())
-            .then(data => {
-                const table = document.getElementById('usersTable');
-                data.forEach(user => {
-                    const row = table.insertRow(-1);
-                    row.insertCell(0).innerHTML = user.id;
-                    row.insertCell(1).innerHTML = user.mail;
-                    row.insertCell(2).innerHTML = user.phone;
 
-                    // 添加編輯按鈕
-                    const editCell = row.insertCell(3);
-                    const editButton = document.createElement('button');
-                    editButton.innerHTML = '編輯';
-                    editButton.onclick = function() {
-                        window.location.href = '/update.html?id=' + user.id;
-                    };
-                    editCell.appendChild(editButton);
-                    // 添加刪除按鈕
-                    const deleteCell = row.insertCell(4)
-                    const deleteButton = document.createElement('button'):
-                    deleteButton.innerHTML = '刪除';
-                    deleteButton.onclick = function() {
-                      if (confirm('確定要刪除?')) {
-                          fetch('/api/users/' + user.id, { method: 'DELETE' })
-                              .then(response => response.json())
-                              .then(data => {
-                                 alert('delete complete');
-                                 window.location.reload();
-                              })
-                              .catch(error => console.error('Error' , reeor)):
-                      }
-                };
-                deleteCell.appendChild(deleteButton):
-                });
-            })
-            .catch(error => console.error('Error:', error));
-    };
-</script>
+    <script>
+        window.onload = function() {
+            fetch('/api/users')
+                .then(response => response.json())
+                .then(data => {
+                    const table = document.getElementById('usersTable');
+                    data.forEach(user => {
+                        const row = table.insertRow(-1);
+                        row.insertCell(0).innerHTML = user.id;
+                        row.insertCell(1).innerHTML = user.mail;
+                        row.insertCell(2).innerHTML = user.phone;
 
+                        // 添加編輯按鈕
+                        const editCell = row.insertCell(3);
+                        const editButton = document.createElement('button');
+                        editButton.innerHTML = '編輯';
+                        editButton.onclick = function() {
+                            window.location.href = '/update.html?id=' + user.id;
+                        };
+                        editCell.appendChild(editButton);
+
+                        // 添加刪除按鈕
+                        const deleteCell = row.insertCell(4);
+                        const deleteButton = document.createElement('button');
+                        deleteButton.innerHTML = '刪除';
+                        deleteButton.onclick = function() {
+                            if (confirm('確定要刪除?')) {
+                                fetch('/api/users/' + user.id, { method: 'DELETE' })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        alert('刪除成功');
+                                        window.location.reload();
+                                    })
+                                    .catch(error => console.error('Error:', error));
+                            }
+                        };
+                        deleteCell.appendChild(deleteButton);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        };
+    </script>
 </body>
 </html>
-  </div> 
-
-</body>
