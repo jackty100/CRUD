@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>更新用戶</title>
+<title>更新用戶</title>
+
 </head>
 <body>
     <h1>更新用戶</h1>
@@ -9,25 +10,22 @@
         <input type="hidden" id="userId" name="id">
         <div>
             <label for="mail">電子郵箱:</label>
-            <input  id="mail" name="mail" required>
+            <input type="email" id="mail" name="mail" required>
         </div>
         <div>
             <label for="phone">電話:</label>
-            <input id="phone" name="phone" required>
+            <input type="tel" id="phone" name="phone" required>
         </div>
         <button type="submit">更新</button>
     </form>
 
     <script>
-        document.getElementById('updateForm').onsubmit = function(event) {
+        document.getElementById('updateForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
-            // 從 URL 獲取用戶 ID
-            const urlParams = new URLSearchParams(window.location.search);
-            const userId = urlParams.get('id');
-
-            // 構造 JSON 對象
+            const userId = new URLSearchParams(window.location.search).get('id');
             const userData = {
+                id: userId,
                 mail: document.getElementById('mail').value,
                 phone: document.getElementById('phone').value
             };
@@ -46,7 +44,7 @@
                 console.error('Error:', error);
                 alert('更新失敗');
             });
-        };
+        });
     </script>
 </body>
 </html>
