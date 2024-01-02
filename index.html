@@ -35,7 +35,7 @@
                     const deleteCell = row.insertCell(4)
                     const deleteButton = document.createElement('button'):
                     deleteButton.innerHTML = '刪除';
-                    deleteButton.onclick = fuction() {
+                    deleteButton.onclick = function() {
                       if (confirm('確定要刪除?')) {
                           fetch('/api/users/' + user.id, { method: 'DELETE' })
                               .then(response => response.json())
