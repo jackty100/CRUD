@@ -20,6 +20,10 @@
     </form>
 
     <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+        document.getElementById('mail').value = mail; // mail 變數的值
+        document.getElementById('phone').value = phone; // phone 變數的值
+    });
         document.getElementById('updateForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
