@@ -21,11 +21,21 @@
     <script>
         document.getElementById('updateForm').onsubmit = function(event) {
             event.preventDefault();
-            const formData = new FormData(this);
 
-            fetch('/api/users/' + formData.get('id'), {
+            // 從 URL 獲取用戶 ID
+            const urlParams = new URLSearchParams(window.location.search);
+            const userId = urlParams.get('id');
+
+            // 構造 JSON 對象
+            const userData = {
+                mail: document.getElementById('mail').value,
+                phone: document.getElementById('phone').value
+            };
+
+            fetch('/api/users/' + userId, {
                 method: 'PUT',
-                body: formData
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData)
             })
             .then(response => response.json())
             .then(data => {
@@ -40,4 +50,3 @@
     </script>
 </body>
 </html>
-
