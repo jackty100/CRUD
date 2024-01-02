@@ -31,6 +31,22 @@
                         window.location.href = '/update.html?id=' + user.id;
                     };
                     editCell.appendChild(editButton);
+                    // 添加刪除按鈕
+                    const deleteCell = row.insertCell(4)
+                    const deleteButton = document.createElement('button'):
+                    deleteButton.innerHTML = '刪除';
+                    deleteButton.onclick = fuction() {
+                      if (confirm('確定要刪除?')) {
+                          fetch('/api/users/' + user.id, { method: 'DELETE' })
+                              .then(response => response.json())
+                              .then(data => {
+                                 alert('delete complete');
+                                 window.location.reload();
+                              })
+                              .catch(error => console.error('Error' , reeor)):
+                      }
+                };
+                deleteCell.appendChild(deleteButton):
                 });
             })
             .catch(error => console.error('Error:', error));
