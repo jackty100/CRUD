@@ -57,9 +57,9 @@
                 .catch(error => console.error('Error:', error));
 
             // 設置定時器每隔 5 秒刷新頁面
-            setTimeout(function() {
+            setInterval(function() {
                 window.location.reload();
-            }, 5000);
+            }, 1000);
         };
     </script>
 </body>
