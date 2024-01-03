@@ -16,6 +16,28 @@
     </table>
 
     <script>
+        
+要在您的 index.html 頁面上添加一個功能，使頁面每隔 5 秒自動刷新（F5），您可以使用 JavaScript 中的 setTimeout 函數配合 location.reload() 方法來實現這一功能。以下是如何在您的 index.html 中添加這個功能的代碼：
+
+html
+Copy code
+<!DOCTYPE html>
+<html>
+<head>
+    <title>您的頁面標題</title>
+    <!-- 其他 head 內容 -->
+</head>
+<body>
+    <!-- 頁面內容 -->
+
+    <script>
+        // 當文檔加載完成時執行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 設置定時器，每隔 5000 毫秒（5 秒）刷新頁面
+            setTimeout(function() {
+                window.location.reload();
+            }, 5000);
+        });
         window.onload = function() {
             fetch('/api/users')
                 .then(response => response.json())
