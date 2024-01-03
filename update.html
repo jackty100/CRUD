@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>更新用戶</title>
-
+    <title>更新用戶</title>
 </head>
 <body>
     <h1>更新用戶</h1>
@@ -14,35 +13,46 @@
         </div>
         <div>
             <label for="phone">電話:</label>
-            <input  id="phone" name="phone" required>
+            <input id="phone" name="phone" required>
         </div>
         <button type="submit">更新</button>
     </form>
 
     <script>
-        document.getElementById('updateForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
+        document.addEventListener('DOMContentLoaded', function() {
             const userId = new URLSearchParams(window.location.search).get('id');
-            const userData = {
-                id: userId,
-                mail: document.getElementById('mail').value,
-                phone: document.getElementById('phone').value
-            };
+            document.getElementById('userId').value = userId;
 
-            fetch('/api/users/' + userId, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(userData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert('用戶已更新');
-                window.location.href = '/index.html';
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('更新失敗');
+            // 從後端獲取用戶數據
+            fetch('/api/users/' + userId)
+                .then(response => response.json())
+                .then(userData => {
+                    document.getElementById('mail').value = userData.mail || '';
+                    document.getElementById('phone').value = userData.phone || '';
+                })
+                .catch(error => console.error('Error:', error));
+
+            document.getElementById('updateForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const updatedData = {
+                    mail: document.getElementById('mail').value,
+                    phone: document.getElementById('phone').value
+                };
+
+                fetch('/api/users/' + userId, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updatedData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert('用戶已更新');
+                    window.location.href = '/index.html';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('更新失敗');
+                });
             });
         });
     </script>
