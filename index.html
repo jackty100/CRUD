@@ -17,6 +17,7 @@
     </table>
 
     <script>
+        setInterval(fetchuser, 1000); 
         function fetchuser() {
             fetch('/api/users')
                 .then(response => response.json())
@@ -62,10 +63,6 @@
                 })
                 .catch(error => console.error('Error:', error));
         }
-
-        window.onload = function() {
-            fetchuser(); 
-            setInterval(fetchAndDisplayUsers, 1000); 
         };
     </script>
 </body>
