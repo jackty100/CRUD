@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
 <head>
     <title>用戶列表</title>
 </head>
@@ -16,11 +17,16 @@
     </table>
 
     <script>
-        window.onload = function() {
+        function fetchuser() {
             fetch('/api/users')
                 .then(response => response.json())
                 .then(data => {
                     const table = document.getElementById('usersTable');
+                    // 清空現有的表格行（除了標題行）
+                    while (table.rows.length > 1) {
+                        table.deleteRow(1);
+                    }
+                    // 為每個用戶添加行到表格
                     data.forEach(user => {
                         const row = table.insertRow(-1);
                         row.insertCell(0).innerHTML = user.id;
@@ -46,7 +52,7 @@
                                     .then(response => response.json())
                                     .then(data => {
                                         alert('刪除成功');
-                                        window.location.reload();
+                                        fetchAndDisplayUsers(); // 重新獲取用戶列表
                                     })
                                     .catch(error => console.error('Error:', error));
                             }
@@ -55,11 +61,11 @@
                     });
                 })
                 .catch(error => console.error('Error:', error));
+        }
 
-            // 設置定時器每隔 5 秒刷新頁面
-            setInterval(function() {
-                window.location.reload();
-            }, 1000);
+        window.onload = function() {
+            fetchuser(); 
+            setInterval(fetchAndDisplayUsers, 1000); 
         };
     </script>
 </body>
